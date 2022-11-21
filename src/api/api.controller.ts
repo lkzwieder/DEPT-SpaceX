@@ -1,33 +1,35 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+
 import { ApiService } from './api.service';
+import { UsersService } from '../users/users.service';
+import { FavoriteFlightDto } from './dtos/favorite-flight.dto';
 
 @Controller('api')
 export class ApiController {
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private userService: UsersService,
+  ) {
     this.apiService = apiService;
   }
 
   @Get('/flights')
-  getFlights() {
-    return this.apiService.getFlights();
+  async getFlights() {
+    const user = await this.userService.getUser();
+    return this.apiService.getFlights(user);
   }
 
-  // TODO separate /user endpoints
-  @Get('/user/favorites')
-  getFavorites() {
-    return [
-      { id: 1, name: 'Flight 1' },
-      { id: 3, name: 'Flight 3' },
-    ];
+  @Post('/favorite')
+  async addFavorite(@Body() favoriteFlight: FavoriteFlightDto) {
+    const { flightNumber } = favoriteFlight;
+    const user = await this.userService.getUser();
+    return this.userService.addFavorite(flightNumber, user);
   }
 
-  @Post('/user/favorite/add')
-  addFavorite() {
-    return { success: true };
-  }
-
-  @Post('/user/favorite/remove')
-  removeFavorite() {
-    return { success: true };
+  @Delete('/favorite')
+  async removeFavorite(@Body() favoriteFlight: FavoriteFlightDto) {
+    const { flightNumber } = favoriteFlight;
+    const user = await this.userService.getUser();
+    return this.userService.removeFavorite(flightNumber, user);
   }
 }

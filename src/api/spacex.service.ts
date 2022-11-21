@@ -3,10 +3,10 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from "rxjs";
 import { map } from 'rxjs/operators';
 
-import { Constants } from 'src/api/common/spacex.constant';
+import { Constants } from 'src/common/spacex.constant';
 
 @Injectable()
-export class FlightRepository {
+export class SpacexService {
   constructor(private readonly httpService: HttpService) {
     this.httpService = httpService;
   }

@@ -1,2 +1,21 @@
 ### Get all flights from spacex
 GET http://localhost:3000/api/flights
+
+### Get all favorite flights from a random user
+GET http://localhost:3000/api/user/favorites
+
+### Add favorites
+POST http://localhost:3000/api/favorite
+Content-Type: application/json
+
+{
+    "flightNumber": 1
+}
+
+### Remove favorites
+DELETE http://localhost:3000/api/favorite
+Content-Type: application/json
+
+{
+    "flightNumber": 1
+}
