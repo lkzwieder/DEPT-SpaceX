@@ -1,14 +1,15 @@
 import { Controller, Get, Post } from '@nestjs/common';
+import { ApiService } from './api.service';
 
 @Controller('api')
 export class ApiController {
+  constructor(private apiService: ApiService) {
+    this.apiService = apiService;
+  }
+
   @Get('/flights')
   getFlights() {
-    return [
-      { id: 1, name: 'Flight 1' },
-      { id: 2, name: 'Flight 2' },
-      { id: 3, name: 'Flight 3' },
-    ];
+    return this.apiService.getFlights();
   }
 
   // TODO separate /user endpoints
