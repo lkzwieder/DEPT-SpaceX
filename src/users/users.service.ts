@@ -37,7 +37,7 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  private async ensureFavorite(flightNumber: number, user: User) {
+  private ensureFavorite(flightNumber: number, user: User) {
     const favorites = JSON.parse(user.favorites);
     if (favorites.includes(flightNumber)) {
       throw new BadRequestException('Flight already favorited');
