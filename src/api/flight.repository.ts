@@ -11,15 +11,23 @@ export class FlightRepository {
     this.httpService = httpService;
   }
 
-  async getFlights() {
+  private getter(url: string) {
     try {
       return firstValueFrom(
         this.httpService
-          .get(`${Constants.SPACEX_API_URL}/launches`)
-          .pipe(map((res) => [res.data, res.status])),
+          .get(`${Constants.SPACEX_API_URL}/${url}`)
+          .pipe(map((res) => [res.status, res.data])),
       );
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async getRockets() {
+    return this.getter('rockets');
+  }
+
+  async getFlights() {
+    return this.getter('launches');
   }
 }
