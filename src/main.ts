@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ApiModule } from './api/api.module';
-import { BasePipe } from './common/pipes/base.pipe';
+import { BasePipe } from './common/base.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
