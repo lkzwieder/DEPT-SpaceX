@@ -9,9 +9,7 @@ export class ApiController {
   constructor(
     private apiService: ApiService,
     private userService: UsersService,
-  ) {
-    this.apiService = apiService;
-  }
+  ) {}
 
   @Get('/flights')
   async getFlights() {

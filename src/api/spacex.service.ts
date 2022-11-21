@@ -3,7 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Constants } from 'src/common/spacex.constant';
+import { Constants } from '../common/spacex.constant';
 
 @Injectable()
 export class SpacexService {
