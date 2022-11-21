@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from "rxjs";
+import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Constants } from 'src/common/spacex.constant';
+import { Constants } from 'src/common/spacex.constant';
 
 @Injectable()
 export class SpacexService {

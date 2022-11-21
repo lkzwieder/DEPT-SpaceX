@@ -8,14 +8,17 @@ import { ApiService } from './api.service';
 import { SpacexService } from './spacex.service';
 
 @Module({
-  imports: [UsersModule, HttpModule, TypeOrmModule.forRoot({
-        type: 'sqlite',
-        database: 'db.sqlite',
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-        autoLoadEntities: true,
-      }
-    )],
+  imports: [
+    UsersModule,
+    HttpModule,
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'db.sqlite',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+      autoLoadEntities: true,
+    }),
+  ],
   controllers: [ApiController],
   providers: [ApiService, SpacexService],
 })
