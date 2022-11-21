@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '../users/users.service';
 import { ApiService } from './api.service';
@@ -11,9 +12,10 @@ describe('ApiController', () => {
   beforeEach(async () => {
     fakeUsersService = {
       getUser: () => Promise.resolve({ userId: 1, favorites: '[]' }),
-      addFavorite: (flightNumber: number, user: any) => Promise.resolve(user),
-      removeFavorite: (flightNumber: number, user: any) =>
-        Promise.resolve(user),
+      addFavorite: (flightNumber: number) =>
+        Promise.resolve({ userId: 1, favorites: '[1]' }),
+      removeFavorite: (flightNumber: number) =>
+        Promise.resolve({ userId: 1, favorites: '[]' }),
     };
 
     fakeApiService = {
@@ -33,5 +35,22 @@ describe('ApiController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('should get flights', async () => {
+    const flights = await controller.getFlights();
+    expect(flights).toBeDefined();
+  });
+
+  it('should add a favorite', async () => {
+    const user = await controller.addFavorite({ flightNumber: 1 });
+    expect(user).toBeDefined();
+    expect(JSON.parse(user.favorites).includes(1)).toBeTruthy();
+  });
+
+  it('should remove a favorite', async () => {
+    const user = await controller.removeFavorite({ flightNumber: 1 });
+    expect(user).toBeDefined();
+    expect(JSON.parse(user.favorites).includes(1)).toBeFalsy();
   });
 });
